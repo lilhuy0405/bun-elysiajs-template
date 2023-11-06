@@ -1,0 +1,8 @@
+.git
+.idea
+.vscode
+README.md
+node_modules
+*.log
+logs/
+*.rdb
