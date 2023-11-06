@@ -117,8 +117,8 @@ const auth = (app: any) => {
       }
     });
 
-    app.get("/me", async ({set}) => {
-      const user = set.user;
+    app.get("/me", async ({request}) => {
+      const user = request.user;
       return {
         message: "Fetch user success",
         data: {

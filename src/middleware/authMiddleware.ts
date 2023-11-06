@@ -2,7 +2,7 @@ import {Elysia} from "elysia";
 import {UserService} from "../service";
 
 const userService = new UserService();
-export const isAuthenticated = async ({set, headers, jwt, ...rest}) => {
+export const isAuthenticated = async ({set, headers, jwt, request}) => {
   //get headers
   const {authorization} = headers;
   if (!authorization) {
@@ -35,8 +35,9 @@ export const isAuthenticated = async ({set, headers, jwt, ...rest}) => {
       message: "User not found"
     }
   }
-  //add user to context
-  set.user = user;
+  //add user to request
+  request.user = user;
+
 
 
 }
