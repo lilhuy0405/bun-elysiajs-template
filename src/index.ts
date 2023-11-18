@@ -5,6 +5,8 @@ import {cors} from "@elysiajs/cors";
 import jwt from "@elysiajs/jwt";
 import swagger from "@elysiajs/swagger";
 import {auth} from "./module";
+import errorMiddleware from "./middleware/errorMiddleware";
+import responseMiddleware from "./middleware/responseMiddleware";
 
 AppDataSource.initialize().then(() => {
   console.log('Database connected');
@@ -48,18 +50,21 @@ app.get('/', () => {
   }
 });
 
-app.group('/api', (ctx: any) => {
-  ctx.use(jwt({
-    name: 'jwt',
-    // @ts-ignore
-    secret: Bun.env.JWT_SECRET,
-    exp: '1y'
-  }));
-  //add module
-  ctx.use(auth)
+app
+  .onAfterHandle(responseMiddleware)
+  .onError(errorMiddleware)
+  .group('/api', (ctx: any) => {
+    ctx.use(jwt({
+      name: 'jwt',
+      // @ts-ignore
+      secret: Bun.env.JWT_SECRET,
+      exp: '1y'
+    }));
+    //add module
+    ctx.use(auth)
 
-  return ctx;
-});
+    return ctx;
+  });
 
 // @ts-ignore
 app.listen(Bun.env.PORT || 3000);

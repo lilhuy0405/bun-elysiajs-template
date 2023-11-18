@@ -1,4 +1,5 @@
 import {Entity, PrimaryGeneratedColumn, Column} from "typeorm"
+import {AppRole} from "../enum";
 
 @Entity()
 export class User {
@@ -14,5 +15,11 @@ export class User {
 
   @Column()
   password: string
+
+  @Column({
+    default: AppRole.USER,
+    type: "varchar",
+  })
+  role: AppRole
 
 }
