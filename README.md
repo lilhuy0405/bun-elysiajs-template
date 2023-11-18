@@ -1,14 +1,18 @@
 # Elysia with Bun runtime
 
 ## Getting Started
-
-To get started with this template, simply paste this command into your terminal:
-
+### 1. Install bun 1.0.3 Ubuntu
 ```bash
-bun create elysia ./elysia-example
+curl -fsSL https://bun.sh/install | bash -s "bun-v1.0.3"
 ```
 
-## Development
+### 2. Install dependencies
+```bash
+bun install
+```
+
+
+### 3. Development
 
 To start the development server run:
 
@@ -37,9 +41,8 @@ bun run dev
   open http://localhost:8080/ with your browser to see the result.
 - This project have setup swagger, jwt auth using postgres database.
 ### 2. Modules Note
-
-- Add more modules in `src/modules` folder then tell Elysia to load it in `src/index.ts`  => `ctx.use(yourModule)`
 - Modules in Elysia is just a group of handlers (or controller so to speak)
+- Add more modules in `src/modules` folder then tell Elysia to load it in `src/index.ts`  => `ctx.use(yourModule)`
 - Each module have it own router and to call the  service (which contains logical code)
 
 ### 3. Authentication Note
