@@ -3,7 +3,7 @@ import {UserService} from "../service";
 import {hasRoles} from "../middleware/authMiddleware";
 import {AppRole} from "../enum";
 
-const userService = new UserService();
+const userService = UserService.getInstance();
 const auth = (app: any) => {
   return app.group("/auth", (app: typeof Elysia) => {
     app.post("/register", async ({body}) => {

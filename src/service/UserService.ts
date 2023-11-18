@@ -6,9 +6,17 @@ import {AppRole} from "../enum";
 
 class UserService {
   private _userRepository: Repository<User>
+  private static instance: UserService;
 
   constructor() {
     this._userRepository = AppDataSource.getRepository(User)
+  }
+
+  static getInstance() {
+    if (!UserService.instance) {
+      UserService.instance = new UserService();
+    }
+    return UserService.instance;
   }
 
   async register(username: string, password: string) {
